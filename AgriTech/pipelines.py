@@ -10,7 +10,7 @@ import re
 from twisted.enterprise import adbapi
 
 
-class AgriteachPipeline(object):
+class AgritechPipeline(object):
     def process_item(self, item, spider):
 
         return item

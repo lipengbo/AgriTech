@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for AgriTeach project
+# Scrapy settings for AgriTech project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -15,17 +15,17 @@ from fake_useragent import UserAgent
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-BOT_NAME = 'AgriTeach'
+BOT_NAME = 'AgriTech'
 
 sys.path.append(os.path.join(BASE_DIR, BOT_NAME))
 
 
-SPIDER_MODULES = ['AgriTeach.spiders']
-NEWSPIDER_MODULE = 'AgriTeach.spiders'
+SPIDER_MODULES = ['AgriTech.spiders']
+NEWSPIDER_MODULE = 'AgriTech.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'AgriTeach (+http://www.yourdomain.com)'
+# USER_AGENT = 'AgriTech (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -57,13 +57,13 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'AgriTeach.middlewares.AgriteachSpiderMiddleware': 543,
+#    'AgriTech.middlewares.AgritechSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   'AgriTeach.middlewares.AgriteachDownloaderMiddleware': 543,
+   'AgriTech.middlewares.AgritechDownloaderMiddleware': 543,
 }
 
 # Enable or disable extensions
@@ -77,8 +77,8 @@ DOWNLOADER_MIDDLEWARES = {
 
 ITEM_PIPELINES = {
     # 'scrapy_redis.pipelines.RedisPipeline': 300,
-    'AgriTeach.pipelines.MysqlTwistedPipline': 400,
-    # 'AgriTeach.pipelines.AgriteachPipeline': 300,
+    'AgriTech.pipelines.MysqlTwistedPipline': 400,
+    # 'AgriTech.pipelines.AgritechPipeline': 300,
 }
 
 

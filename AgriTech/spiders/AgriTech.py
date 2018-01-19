@@ -1,19 +1,10 @@
 # -*- coding: utf-8 -*-
-import re
-import os
-import scrapy
-import pickle
 
 from scrapy import Request, FormRequest, Spider
 from urllib.parse import urljoin
 from fake_useragent import UserAgent
-from selenium import webdriver
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-from AgriTeach.items import AgriteachItem
+from AgriTech.items import AgritechItem
 from scrapy_redis.spiders import RedisSpider
 
 
@@ -94,7 +85,7 @@ class AgritechSpider(Spider):
             )
 
     def parse_detail(self, response):
-        items = AgriteachItem()
+        items = AgritechItem()
         node = response.css("div.List table tr")
         items['key_val'] = {}
         items['db_title'] = response.meta.get("db_title", "").replace("、", "")

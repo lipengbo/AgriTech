@@ -9,7 +9,7 @@ import scrapy
 from django.db import models
 
 
-class AgriteachItem(scrapy.Item):
+class AgritechItem(scrapy.Item):
     # define the fields for your item here like:
     key_val = scrapy.Field()
     db_title = scrapy.Field()
@@ -36,7 +36,7 @@ class AgriteachItem(scrapy.Item):
         return sql
 
 
-class AgriteachcodeItem(scrapy.Item):
+class AgritechcodeItem(scrapy.Item):
     # define the fields for your item here like:
     db_code = scrapy.Field()
     item_code = scrapy.Field()
