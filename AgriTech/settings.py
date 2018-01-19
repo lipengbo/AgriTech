@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BOT_NAME = 'AgriTech'
 
 sys.path.append(os.path.join(BASE_DIR, BOT_NAME))
+sys.path.append(os.path.join(BASE_DIR, 'tools'))
 
 
 SPIDER_MODULES = ['AgriTech.spiders']
@@ -93,7 +94,7 @@ AUTOTHROTTLE_MAX_DELAY = 60
 # each remote server
 # AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
-# AUTOTHROTTLE_DEBUG = False
+AUTOTHROTTLE_DEBUG = True
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings

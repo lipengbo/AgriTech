@@ -8,9 +8,6 @@ import time
 
 from fake_useragent import UserAgent
 from scrapy import signals
-from scrapy.http import HtmlResponse
-
-from tools.crawl_xici_ip import GetIP
 
 
 class AgritechSpiderMiddleware(object):
