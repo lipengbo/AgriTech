@@ -12,6 +12,7 @@ from twisted.enterprise import adbapi
 
 class AgriteachPipeline(object):
     def process_item(self, item, spider):
+
         return item
 
 
@@ -49,6 +50,6 @@ class MysqlTwistedPipline(object):
         insert_sql = item.get_sql()
 
         result = cursor.execute(insert_sql)
-        print(result, list(item.values()))
+        print(result, item)
 
 

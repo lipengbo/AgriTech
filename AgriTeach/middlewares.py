@@ -10,6 +10,8 @@ from fake_useragent import UserAgent
 from scrapy import signals
 from scrapy.http import HtmlResponse
 
+from tools.crawl_xici_ip import GetIP
+
 
 class AgriteachSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -81,8 +83,8 @@ class AgriteachDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
-        request.headers.setdefault('User-Agent', getattr(UserAgent(), 'random'))
-
+        user = getattr(UserAgent(), 'random')
+        request.headers['User-Agent'] = user
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.

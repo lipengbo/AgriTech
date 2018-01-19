@@ -18,7 +18,6 @@ from scrapy_redis.spiders import RedisSpider
 
 
 class AgritechSpider(Spider):
-    # class AgritechSpider(RedisSpider):
 
     name = 'AgriTech'
     redis_key = "AgriTech:start_urls"
@@ -26,21 +25,17 @@ class AgritechSpider(Spider):
     start_urls = ['http://stb.agridata.cn/Site/Home/Default.aspx']
     list_url = "http://stb.agridata.cn/Site/DataTable/List.aspx"
     detail_url = "http://stb.agridata.cn/Site/DataTable/Detail.aspx?MenuId=-1&DataCategoryGId="
-    headers = {'User-Agent': getattr(UserAgent(), 'random')}
 
     def parse(self, response):
         db_urls = response.xpath('//*[@class="LeftList"]/ul/li/a')
         for db_url in db_urls:
             url = db_url.xpath("@href").extract_first()
             db_title = db_url.xpath("text()").extract_first()
-            self.headers['User-Agent'] = getattr(UserAgent(), 'random')
-            # if "专利" not in db_title:
-            if "中文农业科技文摘数据库" in db_title:
+            if "农业科技文摘数据库" in db_title:
                 url = urljoin(response.url, url)
                 db_code = url.split("DataCategoryGId=")[-1]
                 yield Request(url=url,
                               dont_filter=True,
-                              headers=self.headers,
                               callback=self.parse_page,
                               meta={"db_title": db_title,
                                     'db_code': db_code
@@ -64,12 +59,14 @@ class AgritechSpider(Spider):
             "PageSplitBottom$ImageButtonGoto.x": '4',
             "PageSplitBottom$ImageButtonGoto.y": '6',
         }
-        self.headers['User-Agent'] = getattr(UserAgent(), 'random')
         for page in range(1, allpage + 1):
             data["PageSplitBottom$textBoxPageSize"] = str(page)
+            headers = {
+                "User-Agent": getattr(UserAgent(), 'random')
+            }
             yield FormRequest(
                 url=response.url,
-                headers=self.headers,
+                headers=headers,
                 formdata=data,
                 callback=self.parse_detail_code,
                 meta={"db_title": response.meta.get("db_title", ""),
@@ -83,8 +80,12 @@ class AgritechSpider(Spider):
         codes = [i.replace("ShowDetail('", "").replace("')", "") for i in codes]
         for code in codes:
             payloads = {"HiddenGId": code}
+            headers = {
+                "User-Agent": getattr(UserAgent(), 'random')
+            }
             yield FormRequest(
                 url=self.detail_url + response.meta.get("db_code", ""),
+                headers=headers,
                 formdata=payloads,
                 callback=self.parse_detail,
                 meta={"db_title": response.meta.get("db_title", ""),

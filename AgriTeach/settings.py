@@ -10,11 +10,15 @@
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 import os
 
+import sys
 from fake_useragent import UserAgent
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 BOT_NAME = 'AgriTeach'
+
+sys.path.append(os.path.join(BASE_DIR, BOT_NAME))
+
 
 SPIDER_MODULES = ['AgriTeach.spiders']
 NEWSPIDER_MODULE = 'AgriTeach.spiders'
@@ -44,10 +48,11 @@ COOKIES_ENABLED = False
 # TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-# DEFAULT_REQUEST_HEADERS = {
-#     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#     'Accept-Language': 'en',
-# }
+DEFAULT_REQUEST_HEADERS = {
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en',
+    "User-Agent": getattr(UserAgent(), 'random')
+}
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
@@ -81,9 +86,9 @@ ITEM_PIPELINES = {
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-# AUTOTHROTTLE_START_DELAY = 0.1
+AUTOTHROTTLE_START_DELAY = 0
 # The maximum download delay to be set in case of high latencies
-AUTOTHROTTLE_MAX_DELAY = 600
+AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
 # AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
@@ -111,5 +116,3 @@ MYSQL_PASSWORD = "123456"
 # Ensure all spiders share same duplicates filter through redis.
 # DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 
-
-SECRET_KEY = '3=j8cp5+a=ni!^3vpx1%n9v!#31&4hm1kyj^f&-$cnhfm+5)^a'
